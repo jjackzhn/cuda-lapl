@@ -1,8 +1,7 @@
 cuda-lapl
 ==========
-----------------------
-Forked to use with HIP tools
-----------------------
+
+=== Forked to use with HIP tools ===
 
 This is a benchmark that performs a discreet 2D laplacian operation a number of times on a given vector. The benchmark therefore evaluates the performance of nearest neighboring single hop stencil operations.
 
