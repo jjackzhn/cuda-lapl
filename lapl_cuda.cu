@@ -99,7 +99,7 @@ dev_lapl_iter_optim(float *out, float *in)
 extern "C" void
 init_lapl_cuda(float *arr, float sigma)
 {
-  cudaSetDevice(1);
+  cudaSetDevice(0);
   cudaMalloc((void **)&dev_arr[0], sizeof(float)*Lx*Ly);
   cudaMalloc((void **)&dev_arr[1], sizeof(float)*Lx*Ly);
   cudaMemcpy(dev_arr[0], arr, sizeof(float)*Lx*Ly, cudaMemcpyHostToDevice);
