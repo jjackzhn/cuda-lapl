@@ -5,7 +5,7 @@
 static int idx;			/* holds the current iteration index */
 static float *dev_arr[2];	/* GPU arrays */
 __constant__ float delta;
-__constant__ float norm;
+__constant__ float lapl_norm;
 
 /*
  * Naive implementation of a single iteration of the lapl
@@ -26,7 +26,7 @@ dev_lapl_iter(float *out, float *in)
   int v0m = y*Lx + (Lx + x - 1)%Lx;
   int vp0 = ((y+1)%Ly)*Lx + x;
   int vm0 = ((Ly+y-1)%Ly)*Lx + x;
-  out[v00] = norm*in[v00]
+  out[v00] = lapl_norm*in[v00]
     + delta*(in[v0p] + in[v0m] + in[vp0] + in[vm0]);
   return;
 }
@@ -86,7 +86,7 @@ dev_lapl_iter_optim(float *out, float *in)
     int x0m = (ity+1)*(NTX+2) + itx;
     int xp0 = (ity+2)*(NTX+2) + itx+1;
     int xm0 = (ity)*(NTX+2) + itx+1;
-    out[v00] = norm*in_sub[x00]
+    out[v00] = lapl_norm*in_sub[x00]
       + delta*(in_sub[x0p] + in_sub[x0m] + in_sub[xp0] + in_sub[xm0]);
   }
   return;
